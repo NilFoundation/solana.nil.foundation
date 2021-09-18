@@ -1,8 +1,8 @@
 # Site settings
 email: "nemo@nil.foundation"
-url: "https://filecoin.nil.foundation"
+url: "https://solana.nil.foundation"
 description: ""
-subtitle: "<div style='float: left; margin-right: 0.5em;'>Our Filecoin-related:</div>"
+subtitle: "<div style='float: left; margin-right: 0.5em;'>Our Solana-related:</div>"
 areas: 
     - "Activites"
     - "Services"
@@ -13,8 +13,8 @@ titles:
     - title: "<span style='font-family:Menlo, Courier, monospace'>=nil;</span> Foundation"
       plain: "=nil; Foundation"
       url: "https://nil.foundation"
-    - title: "Filecoin"
-      plain: "Filecoin"
+    - title: "Solana"
+      plain: "Solana"
       url: "#page-top"
 
 
