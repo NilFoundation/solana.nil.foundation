@@ -2,7 +2,7 @@
 layout: default
 date: 2021-10-15
 name: <span style='font-family:Menlo, Courier, monospace'>=nil;</span> Crypto3's In-EVM Solana "Light Client" State Verification
-link: https://blog.nil.foundation/2021/10/11/solana-ethereum-bridge.html
+link: https://blog.nil.foundation/2021/10/14/solana-ethereum-bridge.html
 category: 
 img: logomark-gradient.png
 tag: project
