@@ -2,11 +2,11 @@ var indexSectionsWithContent =
 {
   0: "<abcegilmnprstv",
   1: "blv",
-  2: "im",
+  2: "ceimpsv",
   3: "m",
   4: "acelnprstv",
   5: "gps",
-  6: "<"
+  6: "<cemps"
 };
 
 var indexSectionNames =
