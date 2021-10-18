@@ -112,11 +112,8 @@ $(function() {
 <div class="title">SHA2-256 Circuit </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_manual_circuit_sha2_256"></a> </p>
+<div class="textblock"><p><a class="anchor" id="md_manual_circuit_sha2_256"></a> Suppose that input data in the 32-bits form, which is already padded to the required size. Checking that chunked input data corresponds to the original data out of this circuit. However, we add the boolean check and range proof.</p>
 <h2><a class="anchor" id="autotoc_md4"></a>
-Introduction</h2>
-<p>Suppose that input data in the 32-bits form, which is already padded to the required size. Checking that chunked input data corresponds to the original data out of this circuit. However, we add the boolean check and range proof.</p>
-<h2><a class="anchor" id="autotoc_md5"></a>
 Range proof</h2>
 <p>The Following defines the \(a &lt; 2^{32}\) range proof.</p>
 <p>Let \(a = \{ a_0, ..., a_{15} \}\), where \(a_i\) is two bits.</p>
@@ -124,62 +121,47 @@ Range proof</h2>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone"></th><th class="markdownTableHeadNone">\(w_1\)   </th><th class="markdownTableHeadNone">\(w_2\)   </th><th class="markdownTableHeadNone">\(w_3\)   </th><th class="markdownTableHeadNone">\(w_4\)   </th><th class="markdownTableHeadNone">\(w_o\)    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j - 1   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">0   </td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">j + 0   </td><td class="markdownTableBodyNone">\(a_{12}\)   </td><td class="markdownTableBodyNone">\(a_{13}\)   </td><td class="markdownTableBodyNone">\(a_{14}\)   </td><td class="markdownTableBodyNone">\(a_{15}\)   </td><td class="markdownTableBodyNone">acc    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j + 1   </td><td class="markdownTableBodyNone">\(a_8\)   </td><td class="markdownTableBodyNone">\(a_{9}\)   </td><td class="markdownTableBodyNone">\(a_{10}\)   </td><td class="markdownTableBodyNone">\(a_{11}\)   </td><td class="markdownTableBodyNone">acc    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">j + 2   </td><td class="markdownTableBodyNone">\(a_4\)   </td><td class="markdownTableBodyNone">\(a_5\)   </td><td class="markdownTableBodyNone">\(a_6\)   </td><td class="markdownTableBodyNone">\(a_7\)   </td><td class="markdownTableBodyNone">acc    </td></tr>
+<td class="markdownTableBodyNone">j + 1   </td><td class="markdownTableBodyNone">\(a_8\)   </td><td class="markdownTableBodyNone">\(a_{9}\)   </td><td class="markdownTableBodyNone">\(a_{10}\)   </td><td class="markdownTableBodyNone">\(a_{11}\)   </td><td class="markdownTableBodyNone">acc    </td></tr>
 <tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">j + 2   </td><td class="markdownTableBodyNone">\(a_4\)   </td><td class="markdownTableBodyNone">\(a_5\)   </td><td class="markdownTableBodyNone">\(a_6\)   </td><td class="markdownTableBodyNone">\(a_7\)   </td><td class="markdownTableBodyNone">acc    </td></tr>
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">j + 3   </td><td class="markdownTableBodyNone">\(a_0\)   </td><td class="markdownTableBodyNone">\(a_1\)   </td><td class="markdownTableBodyNone">\(a_2\)   </td><td class="markdownTableBodyNone">\(a_3\)   </td><td class="markdownTableBodyNone">a   </td></tr>
 </table>
 <p>Range gate constraints:</p>
-<p>\(w_{o, j - 1} = 0\) \(w_{1,i} = (w_{1,i}-1)(w_{1,i}-2)(w_{1,i} -3) + w_{2,i}(w_{2,i}-1)(w_{2,i}-2)(w_{2,i} - 3) + w_{3,i}(w_{3,i}-1)(w_{3,i}-2)(w_{3,i} -3) + w_{4,i}(w_{4,i}-1)(w_{4,i}-2)(w_{4,i} -3)\) \(w_{o,i} = w_{o, i - 1} * 4^4 + w_{4,i}*4^3 + w_{3,i}* 4^2 + w_{2,i} * 4 + w_{1,i}\)</p>
+<p>\(w_{1,i} = (w_{1,i}-1)(w_{1,i}-2)(w_{1,i} - 3) + w_{2,i}(w_{2,i}-1)(w_{2,i}-2)(w_{2,i} - 3) + w_{3,i}(w_{3,i}-1)(w_{3,i}-2)(w_{3,i} - 3) + \\\ + w_{4,i}(w_{4,i}-1)(w_{4,i}-2)(w_{4,i} -3)\) <br  />
+ \(w_{o,i} = w_{o, i - 1} * 4^4 + w_{4,i}*4^3 + w_{3,i}* 4^2 + w_{2,i} * 4 + w_{1,i}\)</p>
 <p>The range proofs are included for each input data block.</p>
-<h2><a class="anchor" id="autotoc_md6"></a>
+<h2><a class="anchor" id="autotoc_md5"></a>
 Sigma function #1</h2>
-<p>The following defines the function \(\sigma_0\), which contains sparse mapping sub-circuit with base \(2\).</p>
-<p>Let \(a\) be divided to \(a_0, a_1, a_2, a_3\) 8 bits-chunks. The values \(a&#39;_0, a&#39;_1, a&#39;_2, a&#39;_3\) are in sparse form, and \(a&#39;\) is a sparse \(a\). We need the following lookup tables:</p>
+<p>The following defines the function \(\sigma_0\), which contains sparse mapping sub-circuit with base \(2\). Let \(a\) be divided to \(a_0, a_1, a_2, a_3\) 8 bits-chunks. The values \(a&#39;_0, a&#39;_1, a&#39;_2, a&#39;_3\) are in sparse form, and \(a&#39;\) is a sparse \(a\). We need the following lookup tables:</p>
 <ol type="1">
 <li><b>SHA-256 NORMALIZE2</b>: Read \(a&#39;_i\) to \(a_i\)</li>
-<li><b>SHA-256 8ROT7 32</b>: Read \(a&#39;_0\) to \(r_1\)</li>
-<li><b>SHA-256 8ROT2 32</b>: Read \(a&#39;_2\) to \(r_2\)</li>
-<li><b>SHA-256 8ROT3 32</b>: Read \(a&#39;_0\) to \(r_3\)</li>
+<li><b>SHA-256 8ROT3 32</b>: Read \(a&#39;_1\) to \(r_1\)</li>
+<li><b>SHA-256 8ROT2 32</b>: Read \(a&#39;_4\) to \(r_2\)</li>
+<li><b>SHA-256 8SHR3 32</b>: Read \(a&#39;_0\) to \(r_3\)</li>
 </ol>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone"></th><th class="markdownTableHeadNone">\(w_1\)   </th><th class="markdownTableHeadNone">\(w_2\)   </th><th class="markdownTableHeadNone">\(w_3\)   </th><th class="markdownTableHeadNone">\(w_4\)   </th><th class="markdownTableHeadNone">\(w_o\)    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j - 8   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(a_{0, 2}\)   </td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">...   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">j + 0   </td><td class="markdownTableBodyNone">\(a_0\)   </td><td class="markdownTableBodyNone">\(a_1\)   </td><td class="markdownTableBodyNone">\(a_2\)   </td><td class="markdownTableBodyNone">\(a_3\)   </td><td class="markdownTableBodyNone">a    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">j + 1   </td><td class="markdownTableBodyNone">\(a&#39;_0\)   </td><td class="markdownTableBodyNone">\(a&#39;_1\)   </td><td class="markdownTableBodyNone">\(a&#39;_2\)   </td><td class="markdownTableBodyNone">\(a&#39;_3\)   </td><td class="markdownTableBodyNone">a'    </td></tr>
+<td class="markdownTableBodyNone">j + 1   </td><td class="markdownTableBodyNone">\(a&#39;_0\)   </td><td class="markdownTableBodyNone">\(a&#39;_1\)   </td><td class="markdownTableBodyNone">\(a&#39;_2\)   </td><td class="markdownTableBodyNone">\(a&#39;_3\)   </td><td class="markdownTableBodyNone">acc    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j + 2   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(r_1\)   </td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">j + 3   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(r_2\)   </td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j + 4   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(r_3\)   </td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">j + 5   </td><td class="markdownTableBodyNone">\(a_{rot7}\)   </td><td class="markdownTableBodyNone">\(a_{rot18}\)   </td><td class="markdownTableBodyNone">\(a_{rot3}\)   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(\sigma_0\)   </td></tr>
+<td class="markdownTableBodyNone">j + 2   </td><td class="markdownTableBodyNone">\(r1\)   </td><td class="markdownTableBodyNone">\(r_2\)   </td><td class="markdownTableBodyNone">\(r_3\)   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(\sigma_0\)   </td></tr>
 </table>
 <p>Sparse map gate constraints:</p>
 <p>\(w_{o,j} = w_{1,j} + w_{2,j}*2^8 + w_{3,j}*2^{8*2} + w_{4,j}*2^{8*3}\) <br  />
- \(w_{o,j+1} = w_{1,j+1} + w_{2,j+1}*4^8 + w_{3,j+1}*4^{8*2} + w_{4,j+1}*4^{8*3}\) <br  />
- \(w_{1,j+5} = w_{o,j+2} + w_{2,j+1}*4^{8-7} + w_{3,j+1}*4^{8*2-7} + w_{4,j+1}*4^{8*3 - 7}\) <br  />
- \(w_{2,j+5} = w_{o,j+3} + w_{1,j+1}*4^{8*2-2} + w_{2,j+1}*4^{8*3-2} + w_{4,j+1}*4^{8 - 2}\) <br  />
- \(w_{3,j+5} = w_{o,j+4} + w_{2,j+1}*4^{8-3} + w_{3,j+1}*4^{8*2-3} + w_{4,j+1}*4^{8^3 - 3}\) <br  />
- \(w_{o, j+5} = w_{1,j+5} + w_{2, j+5} + w_{3, j+5}\)</p>
-<h2><a class="anchor" id="autotoc_md7"></a>
+ \(w_{o,j+1} = w_{2,j+1}*4^{8-7} + w_{3,j+1}*4^{8*2-7} + w_{4,j+1}*4^{8*3 - 7} + w_{1,j+1}*4^{8*2-2} + w_{2,j+1}*4^{8*3-2} + w_{4,j+1}*4^{8 - 2} + \\\ + w_{2,j+1}*4^{8-3} + w_{3,j+1}*4^{8*2-3} + w_{4,j+1}*4^{8^3 - 3}\) <br  />
+ \(w_{o, j+2} = w_{0, j+1} + w_{1,j+2} + w_{2, j+2} + w_{3, j+2}\)</p>
+<p>7 plookup constraints</p>
+<h2><a class="anchor" id="autotoc_md6"></a>
 Sigma function #2</h2>
-<p>The following defines the function \(\sigma_1\), which contains sparse mapping sub-circuit with base \(2\).</p>
-<p>Let \(a\) be divided to \(a_0, a_1, a_2, a_3\) 8 bits-chunks. The values \(a&#39;_0, a&#39;_1, a&#39;_2, a&#39;_3\) are in sparse form and \(a&#39;\) is a sparse \(a\). We need the following lookup tables:</p>
+<p>The following defines the function \(\sigma_1\), which contain sparse mapping subcircuit with base \(2\). Let \(a\) be divided to \(a_0, a_1, a_2, a_3\) 8 bits-chunks. The values \(a&#39;_0, a&#39;_1, a&#39;_2, a&#39;_3\) are in sparse form and \(a&#39;\) is a sparse \(a\). We need the following lookup tables:</p>
 <ol type="1">
-<li><b>SHA-256 NORMALIZE2</b>: Read \(a&#39;_i\) to \(a_i\)</li>
+<li><b>SHA-256 NORMALIZE2</b>: Read \(a_i\) to \(a&#39;_i\)</li>
 <li><b>SHA-256 8ROT1 32</b>: Read \(a&#39;_2\) to \(r_1\)</li>
 <li><b>SHA-256 8ROT3 32</b>: Read \(a&#39;_2\) to \(r_2\)</li>
 <li><b>SHA-256 8ROT2 32</b>: Read \(a&#39;_1\) to \(r_3\)</li>
@@ -188,51 +170,34 @@ Sigma function #2</h2>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone"></th><th class="markdownTableHeadNone">\(w_1\)   </th><th class="markdownTableHeadNone">\(w_2\)   </th><th class="markdownTableHeadNone">\(w_3\)   </th><th class="markdownTableHeadNone">\(w_4\)   </th><th class="markdownTableHeadNone">\(w_o\)    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j - 8   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(a_{0, 2}\)   </td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">...   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">j + 0   </td><td class="markdownTableBodyNone">\(a_0\)   </td><td class="markdownTableBodyNone">\(a_1\)   </td><td class="markdownTableBodyNone">\(a_2\)   </td><td class="markdownTableBodyNone">\(a_3\)   </td><td class="markdownTableBodyNone">a    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">j + 1   </td><td class="markdownTableBodyNone">\(a&#39;_0\)   </td><td class="markdownTableBodyNone">\(a&#39;_1\)   </td><td class="markdownTableBodyNone">\(a&#39;_2\)   </td><td class="markdownTableBodyNone">\(a&#39;_3\)   </td><td class="markdownTableBodyNone">a'    </td></tr>
+<td class="markdownTableBodyNone">j + 1   </td><td class="markdownTableBodyNone">\(a&#39;_0\)   </td><td class="markdownTableBodyNone">\(a&#39;_1\)   </td><td class="markdownTableBodyNone">\(a&#39;_2\)   </td><td class="markdownTableBodyNone">\(a&#39;_3\)   </td><td class="markdownTableBodyNone">acc    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j + 2   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(r_1\)   </td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">j + 3   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(r_2\)   </td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j + 4   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(r_3\)   </td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">j + 5   </td><td class="markdownTableBodyNone">\(a_{rot17}\)   </td><td class="markdownTableBodyNone">\(a_{rot19}\)   </td><td class="markdownTableBodyNone">\(a_{rot10}\)   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(\sigma_1\)   </td></tr>
+<td class="markdownTableBodyNone">j + 2   </td><td class="markdownTableBodyNone">\(r1\)   </td><td class="markdownTableBodyNone">\(r_2\)   </td><td class="markdownTableBodyNone">\(r_3\)   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(\sigma_1\)   </td></tr>
 </table>
 <p>Sparse map gate constraints:</p>
 <p>\(w_{o,j} = w_{1,j} + w_{2,j}*2^8 + w_{3,j}*2^{8*2} + w_{4,j}*2^{8*3}\) <br  />
- \(w_{o,j+1} = w_{1,j+1} + w_{2,j+1}*4^8 + w_{3,j+1}*4^{8*2} + w_{4,j+1}*4^{8*3}\) <br  />
- \(w_{1,j+5} = w_{o,j+2} + w_{1,j+1}*4^{8*2-1} + w_{2,j+1}*4^{8*3-1} + w_{4,j+1}*4^{8 - 1}\) <br  />
- \(w_{2,j+5} = w_{o,j+3} + w_{1,j+1}*4^{8*2-3} + w_{2,j+1}*4^{8*3-3} + w_{4,j+1}*4^{8 - 3}\) <br  />
- \(w_{3,j+5} = w_{o,j+4} + w_{1,j+1}*4^{8^3-2} + w_{3,j+1}*4^{8-2} + w_{4,j+1}*4^{8^2- 2}\) <br  />
- \(w_{o, j+5} = w_{1,j+5} + w_{2, j+5} + w_{3, j+5}\)</p>
-<p>The sparse values \(\sigma_0\) and \(\sigma_1\) have to be normalized. We use <b>SHA256 NORMALIZE2</b></p>
+ \(w_{o,j+1} = w_{1,j+1}*4^{8*2-1} + w_{2,j+1}*4^{8*3-1} + w_{4,j+1}*4^{8 - 1} + w_{1,j+1}*4^{8*2-3} + w_{2,j+1}*4^ {8*3-3} + w_{4,j+1} * \\\ * 4^{8 - 3} + w_{1,j+1} * 4^{8^3-2} + w_{3,j+1}*4^{8-2} + w_{4,j+1}*4^{8^2- 2}\) \(w_{o, j+2} = w_{0, j+1} + w_{1,j+2} + w_{2, j+2} + w_{3, j+2}\)</p>
+<p>7 plookup constraints</p>
+<p>The sparse values \(\sigma_0\) and \(\sigma_1\) have to be normalized. The final addition requires one add gate. We use <b>SHA256 NORMALIZE2</b></p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone"></th><th class="markdownTableHeadNone">\(w_1\)   </th><th class="markdownTableHeadNone">\(w_2\)   </th><th class="markdownTableHeadNone">\(w_3\)   </th><th class="markdownTableHeadNone">\(w_4\)   </th><th class="markdownTableHeadNone">\(w_o\)    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j - 8   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(a_{0, 2}\)   </td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">j + 0   </td><td class="markdownTableBodyNone">\(a&#39;_0\)   </td><td class="markdownTableBodyNone">\(a&#39;_1\)   </td><td class="markdownTableBodyNone">\(a&#39;_2\)   </td><td class="markdownTableBodyNone">\(a&#39;_3\)   </td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">...   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j + 0   </td><td class="markdownTableBodyNone">\(a_{2,1}\)   </td><td class="markdownTableBodyNone">\(a_{2,2}\)   </td><td class="markdownTableBodyNone">\(a_{3,1}\)   </td><td class="markdownTableBodyNone">\(a_{3,2}\)   </td><td class="markdownTableBodyNone">acc    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">j + 1   </td><td class="markdownTableBodyNone">\(a_{2,1}\)   </td><td class="markdownTableBodyNone">\(a_{2,2}\)   </td><td class="markdownTableBodyNone">\(a_{3,1}\)   </td><td class="markdownTableBodyNone">\(a_{3,2}\)   </td><td class="markdownTableBodyNone">\(\sigma_i\)   </td></tr>
+<td class="markdownTableBodyNone">j + 1   </td><td class="markdownTableBodyNone">\(a_0\)   </td><td class="markdownTableBodyNone">\(a_1\)   </td><td class="markdownTableBodyNone">\(a_2\)   </td><td class="markdownTableBodyNone">\(a_3\)   </td><td class="markdownTableBodyNone">\(\sigma_i\)   </td></tr>
 </table>
 <p>Normalize gate constraints:</p>
-<p>\(w_{o,i} = w_{o, i - 1} * 8^4 + w_{4,i}*8^3 + w_{3,i}* 8^2 + w_{2,i} * 8 + w_{1,i}\)</p>
-<p>The final addition requires one add gate.</p>
-<h2><a class="anchor" id="autotoc_md8"></a>
+<p>\(w_{o,j-1} = w_{4,j} * 4^8*3 + w_{3,j}*4^8*2 + w_{2,j}*4^8 + w_{1,j}\) <br  />
+ \(w_{o,j+1} = w_{4,j+1} * 256^3 + w_{3,j+1}*256^2 + w_{2,j+1}* 256 + w_{1,j+1}\)</p>
+<p>4 plookup constraints</p>
+<h2><a class="anchor" id="autotoc_md7"></a>
 Sigma function #3</h2>
-<p>The following defines the function \(\Sigma_0\), which contain sparse mapping sub-circuit with base \(2\).</p>
-<p>Let \(a\) be divided to \(a_0, a_1, a_2, a_3\) 8 bits-chunks. The values \(a&#39;_0, a&#39;_1, a&#39;_2, a&#39;_3\) are in sparse form, and \(a&#39;\) is a sparse \(a\). We need the following lookup tables:</p>
+<p>The following defines the function \(\Sigma_0\), which contains sparse mapping sub-circuit with base \(2\). Let \(a\) be divided to \(a_0, a_1, a_2, a_3\) 8 bits-chunks. The values \(a&#39;_0, a&#39;_1, a&#39;_2, a&#39;_3\) are in sparse form, and \(a&#39;\) is a sparse \(a\). We need the following lookup tables:</p>
 <ol type="1">
-<li><b>SHA-256 NORMALIZE2</b>: Read \(a&#39;_i\) to \(a_i\)</li>
+<li><b>SHA-256 NORMALIZE2</b>: Read \(a_i\) to \(a&#39;_i\)</li>
 <li><b>SHA-256 8ROT2 32</b>: Read \(a&#39;_0\) to \(r_1\)</li>
 <li><b>SHA-256 8ROT5 32</b>: Read \(a&#39;_1\) to \(r_2\)</li>
 <li><b>SHA-256 8ROT6 32</b>: Read \(a&#39;_2\) to \(r_3\)</li>
@@ -241,35 +206,22 @@ Sigma function #3</h2>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone"></th><th class="markdownTableHeadNone">\(w_1\)   </th><th class="markdownTableHeadNone">\(w_2\)   </th><th class="markdownTableHeadNone">\(w_3\)   </th><th class="markdownTableHeadNone">\(w_4\)   </th><th class="markdownTableHeadNone">\(w_o\)    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j - 8   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(a_{0, 2}\)   </td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">...   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">j + 0   </td><td class="markdownTableBodyNone">\(a_0\)   </td><td class="markdownTableBodyNone">\(a_1\)   </td><td class="markdownTableBodyNone">\(a_2\)   </td><td class="markdownTableBodyNone">\(a_3\)   </td><td class="markdownTableBodyNone">a    </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">j + 1   </td><td class="markdownTableBodyNone">\(a&#39;_0\)   </td><td class="markdownTableBodyNone">\(a&#39;_1\)   </td><td class="markdownTableBodyNone">\(a&#39;_2\)   </td><td class="markdownTableBodyNone">\(a&#39;_3\)   </td><td class="markdownTableBodyNone">a'    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j + 2   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(r_1\)   </td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">j + 3   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(r_2\)   </td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j + 4   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(r_3\)   </td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">j + 5   </td><td class="markdownTableBodyNone">\(a_{rot2}\)   </td><td class="markdownTableBodyNone">\(a_{rot13}\)   </td><td class="markdownTableBodyNone">\(a_{rot22}\)   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(\sigma_0\)   </td></tr>
+<td class="markdownTableBodyNone">j + 2   </td><td class="markdownTableBodyNone">\(r1\)   </td><td class="markdownTableBodyNone">\(r_2\)   </td><td class="markdownTableBodyNone">\(r_3\)   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(\Sigma_0\)   </td></tr>
 </table>
 <p>Sparse map gate constraints:</p>
 <p>\(w_{o,j} = w_{1,j} + w_{2,j}*2^8 + w_{3,j}*2^{8*2} + w_{4,j}*2^{8*3}\) <br  />
  \(w_{o,j+1} = w_{1,j+1} + w_{2,j+1}*4^8 + w_{3,j+1}*4^{8*2} + w_{4,j+1}*4^{8*3}\) <br  />
- \(w_{1,j+5} = w_{o,j+2} + w_{2,j+1}*4^{8-2} + w_{3,j+1}*4^{8*2-2} + w_{4,j+1}*4^{8*3 - 2}\) <br  />
- \(w_{2,j+5} = w_{o,j+3} + w_{1,j+1}*4^{8*3-5} + w_{3,j+1}*4^{8-5} + w_{4,j+1}*4^{8*2 - 5}\) <br  />
- \(w_{3,j+5} = w_{o,j+4} + w_{1,j+1}*4^{8*2-6} + w_{2,j+1}*4^{8*3-6} + w_{4,j+1}*4^{8 - 6}\) <br  />
- \(w_{o, j+5} = w_{1,j+5} + w_{2, j+5} + w_{3, j+5}\)</p>
-<h2><a class="anchor" id="autotoc_md9"></a>
+ \(w_{o,j+2} = w_{2,j+1}*4^{8-2} + w_{3,j+1}*4^{8*2-2} + w_{4,j+1}*4^{8*3 - 2} + w_{1,j+1}*4^{8*3-5} + w_{3,j+1}*4^{8-5}+ w_{4,j+1}*4^{8*2 - 5}+ w_{1,j+1} * \\\ * 4^{8*2-6} + w_{2,j+1}*4^{8*3-6} + w_{4,j+1}*4^{8 - 6} + w_{1,j+2} + w_{2, j+2} + w_{3, j+2}\)</p>
+<p>7 plookup constraints</p>
+<h2><a class="anchor" id="autotoc_md8"></a>
 Sigma function #4</h2>
-<p>The following defines the function \(\Sigma_1\), which contain sparse mapping sub-circuit with base \(2\).</p>
-<p>Let \(a\) be divided to \(a_0, a_1, a_2, a_3\) 8 bits-chunks. The values \(a&#39;_0, a&#39;_1, a&#39;_2, a&#39;_3\) are in sparse form, and \(a&#39;\) is a sparse \(a\). We need the following lookup tables:</p>
+<p>The following defines the function \(\Sigma_1\), which contains sparse mapping sub-circuit with base \(2\). Let \(a\) be divided to \(a_0, a_1, a_2, a_3\) 8 bits-chunks. The values \(a&#39;_0, a&#39;_1, a&#39;_2, a&#39;_3\) are in sparse form, and \(a&#39;\) is a sparse \(a\). We need the following lookup tables:</p>
 <ol type="1">
-<li><b>SHA-256 NORMALIZE2</b>: Read \(a&#39;_i\) to \(a_i\)</li>
+<li><b>SHA-256 NORMALIZE7</b>: Read \(a_i\) to \(a&#39;_i\)</li>
 <li><b>SHA-256 8ROT6 32</b>: Read \(a&#39;_0\) to \(r_1\)</li>
 <li><b>SHA-256 8ROT3 32</b>: Read \(a&#39;_1\) to \(r_2\)</li>
 <li><b>SHA-256 8ROT1 32</b>: Read \(a&#39;_3\) to \(r_3\)</li>
@@ -278,159 +230,99 @@ Sigma function #4</h2>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone"></th><th class="markdownTableHeadNone">\(w_1\)   </th><th class="markdownTableHeadNone">\(w_2\)   </th><th class="markdownTableHeadNone">\(w_3\)   </th><th class="markdownTableHeadNone">\(w_4\)   </th><th class="markdownTableHeadNone">\(w_o\)    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j - 8   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(a_{0, 2}\)   </td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">...   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">j + 0   </td><td class="markdownTableBodyNone">\(a_0\)   </td><td class="markdownTableBodyNone">\(a_1\)   </td><td class="markdownTableBodyNone">\(a_2\)   </td><td class="markdownTableBodyNone">\(a_3\)   </td><td class="markdownTableBodyNone">a    </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">j + 1   </td><td class="markdownTableBodyNone">\(a&#39;_0\)   </td><td class="markdownTableBodyNone">\(a&#39;_1\)   </td><td class="markdownTableBodyNone">\(a&#39;_2\)   </td><td class="markdownTableBodyNone">\(a&#39;_3\)   </td><td class="markdownTableBodyNone">a'    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j + 2   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(r_1\)   </td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">j + 3   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(r_2\)   </td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j + 4   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(r_3\)   </td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">j + 5   </td><td class="markdownTableBodyNone">\(a_{rot2}\)   </td><td class="markdownTableBodyNone">\(a_{rot13}\)   </td><td class="markdownTableBodyNone">\(a_{rot22}\)   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(\sigma_0\)   </td></tr>
+<td class="markdownTableBodyNone">j + 2   </td><td class="markdownTableBodyNone">\(r1\)   </td><td class="markdownTableBodyNone">\(r_2\)   </td><td class="markdownTableBodyNone">\(r_3\)   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(\Sigma_1\)   </td></tr>
 </table>
 <p>Sparse map gate constraints:</p>
 <p>\(w_{o,j} = w_{1,j} + w_{2,j}*2^8 + w_{3,j}*2^{8*2} + w_{4,j}*2^{8*3}\) <br  />
- \(w_{o,j+1} = w_{1,j+1} + w_{2,j+1}*4^8 + w_{3,j+1}*4^{8*2} + w_{4,j+1}*4^{8*3}\) <br  />
- \(w_{1,j+5} = w_{o,j+2} + w_{2,j+1}*4^{8-6} + w_{3,j+1}*4^{8*2-6} + w_{4,j+1}*4^{8*3 - 6}\) <br  />
- \(w_{2,j+5} = w_{o,j+3} + w_{1,j+1}*4^{8*3-3} + w_{3,j+1}*4^{8-3} + w_{4,j+1}*4^{8*2 - 3}\) <br  />
- \(w_{3,j+5} = w_{o,j+4} + w_{1,j+1}*4^{8-1} + w_{2,j+1}*4^{8*2-1} + w_{3,j+1}*4^{8*3 - 1}\) <br  />
- \(w_{o, j+5} = w_{1,j+5} + w_{2, j+5} + w_{3, j+5}\)</p>
-<p>The sparse values \(\Sigma_0\) and \(\Sigma_1\) have to be normalized. We use <b>SHA256 NORMALIZE2</b></p>
+ \(w_{o,j+1} = w_{1,j+1} + w_{2,j+1}*7^8 + w_{3,j+1}*7^{8*2} + w_{4,j+1}*7^{8*3}\) <br  />
+ \(w_{o,j+2} = w_{2,j+1}*7^{8-6} + w_{3,j+1}*7^{8*2-6} + w_{7,j+1}*4^{8*3 - 6}+ w_{1,j+1}*7^{8*3-3} + w_{3,j+1}*7^ {8-3} + w_{4,j+1}*7^{8*2 - 3} + w_{1,j+1} * \\\ * 7^{8-1} + w_{2,j+1}*7^{8*2-1} + w_{3,j+1}*7^{8*3 - 1}+ w_{1,j+2} + w_{2, j+2} + w_{3, j+2}\)</p>
+<p>7 plookup constraints</p>
+<p>The sparse values \(\Sigma_0\) and \(\Sigma_1\) have to be normalized. We use <b>SHA256 NORMALIZE7</b></p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone"></th><th class="markdownTableHeadNone">\(w_1\)   </th><th class="markdownTableHeadNone">\(w_2\)   </th><th class="markdownTableHeadNone">\(w_3\)   </th><th class="markdownTableHeadNone">\(w_4\)   </th><th class="markdownTableHeadNone">\(w_o\)    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j - 8   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(a_{0, 2}\)   </td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">j + 0   </td><td class="markdownTableBodyNone">\(a&#39;_0\)   </td><td class="markdownTableBodyNone">\(a&#39;_1\)   </td><td class="markdownTableBodyNone">\(a&#39;_2\)   </td><td class="markdownTableBodyNone">\(a&#39;_3\)   </td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">...   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j + 0   </td><td class="markdownTableBodyNone">\(a_{2,1}\)   </td><td class="markdownTableBodyNone">\(a_{2,2}\)   </td><td class="markdownTableBodyNone">\(a_{3,1}\)   </td><td class="markdownTableBodyNone">\(a_{3,2}\)   </td><td class="markdownTableBodyNone">acc    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">j + 1   </td><td class="markdownTableBodyNone">\(a_{2,1}\)   </td><td class="markdownTableBodyNone">\(a_{2,2}\)   </td><td class="markdownTableBodyNone">\(a_{3,1}\)   </td><td class="markdownTableBodyNone">\(a_{3,2}\)   </td><td class="markdownTableBodyNone">\(\Sigma_i\)   </td></tr>
+<td class="markdownTableBodyNone">j + 1   </td><td class="markdownTableBodyNone">\(a_0\)   </td><td class="markdownTableBodyNone">\(a_1\)   </td><td class="markdownTableBodyNone">\(a_2\)   </td><td class="markdownTableBodyNone">\(a_3\)   </td><td class="markdownTableBodyNone">\(\Sigma_i\)   </td></tr>
 </table>
 <p>Normalize gate constraints:</p>
-<p>\(w_{o,i} = w_{o, i - 1} * 8^4 + w_{4,i}*8^3 + w_{3,i}* 8^2 + w_{2,i} * 8 + w_{1,i}\)</p>
-<h2><a class="anchor" id="autotoc_md10"></a>
-The Maj function</h2>
-<p>The following defines the Maj function, which contain sparse mapping sub-circuit with base \(2\) for \(a, b ,c\).</p>
-<p>Let \(a; b; c\) be divided to \(a_0, a_1, a_2, a_3; b_0, b_1, b_2, b_3; c_0, c_1, c_2, c_3\) 8 bits-chunks. The values \(a&#39;_0, a&#39;_1, a&#39;_2, a&#39;_3\) are in sparse form, and \(a&#39;\) is a sparse \(a\). We need the following lookup tables:</p>
-<ol type="1">
-<li><b>SHA-256 NORMALIZE2</b>: Read \(a&#39;_i\) to \(a_i\)</li>
-</ol>
-<p>Similarly for b and c.</p>
+<p>\(w_{o,j-1} = w_{4,j} * 4^8*3 + w_{3,j}*4^8*2 + w_{2,j}*4^8 + w_{1,j}\) for \(\Sigma_1\) replace 4 with 7 <br  />
+ \(w_{o,i} = w_{4,i}*256^3 + w_{3,i}* 256^2 + w_{2,i} * 256 + w_{1,i}\)</p>
+<p>7 plookup constraints</p>
+<h3><a class="anchor" id="autotoc_md9"></a>
+The Maj function</h3>
+<p>contain sparse mapping subcircuit with base \(2\) for \(a, b ,c\). Let \(a; b; c\) be divided to \(a_0, a_1, a_2, a_3; b_0, b_1, b_2, b_3; c_0, c_1, c_2, c_3\) 8 bits-chunks. The values \(a&#39;_0, a&#39;_1, a&#39;_2, a&#39;_3\) are in sparse form, and \(a&#39;\) is a sparse \(a\). Similarly for b and c. Note, that \(a\) we already have in the sparse from \(\Sigma_0\) in the circuit. The variables \(b\) and \(c\) were represented in sparse form in the previous rounds or it is public inputs.</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone"></th><th class="markdownTableHeadNone">\(w_1\)   </th><th class="markdownTableHeadNone">\(w_2\)   </th><th class="markdownTableHeadNone">\(w_3\)   </th><th class="markdownTableHeadNone">\(w_4\)   </th><th class="markdownTableHeadNone">\(w_o\)    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j - 24   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(a_{0, 2}\)   </td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">j - k   </td><td class="markdownTableBodyNone">\(a&#39;_0\)   </td><td class="markdownTableBodyNone">\(a&#39;_1\)   </td><td class="markdownTableBodyNone">\(a&#39;_2\)   </td><td class="markdownTableBodyNone">\(a&#39;_3\)   </td><td class="markdownTableBodyNone">a'    </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">...   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j - 16   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(b_{0, 2}\)   </td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">j - l   </td><td class="markdownTableBodyNone">\(b&#39;_0\)   </td><td class="markdownTableBodyNone">\(b&#39;_1\)   </td><td class="markdownTableBodyNone">\(b&#39;_2\)   </td><td class="markdownTableBodyNone">\(b&#39;_3\) b'   </td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">...   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j - 8   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(c_{0, 2}\)   </td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">j - t   </td><td class="markdownTableBodyNone">\(c&#39;_0\)   </td><td class="markdownTableBodyNone">\(c&#39;_1\)   </td><td class="markdownTableBodyNone">\(c&#39;_2\)   </td><td class="markdownTableBodyNone">\(c&#39;_3\)   </td><td class="markdownTableBodyNone">c'    </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">...   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j + 0   </td><td class="markdownTableBodyNone">\(a_0\)   </td><td class="markdownTableBodyNone">\(a_1\)   </td><td class="markdownTableBodyNone">\(a_2\)   </td><td class="markdownTableBodyNone">\(a_3\)   </td><td class="markdownTableBodyNone">a    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">j + 1   </td><td class="markdownTableBodyNone">\(a&#39;_0\)   </td><td class="markdownTableBodyNone">\(a&#39;_1\)   </td><td class="markdownTableBodyNone">\(a&#39;_2\)   </td><td class="markdownTableBodyNone">\(a&#39;_3\)   </td><td class="markdownTableBodyNone">a'    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j + 2   </td><td class="markdownTableBodyNone">\(b_0\)   </td><td class="markdownTableBodyNone">\(b_1\)   </td><td class="markdownTableBodyNone">\(b_2\)   </td><td class="markdownTableBodyNone">\(b_3\)   </td><td class="markdownTableBodyNone">b    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">j + 3   </td><td class="markdownTableBodyNone">\(b&#39;_0\)   </td><td class="markdownTableBodyNone">\(b&#39;_1\)   </td><td class="markdownTableBodyNone">\(b&#39;_2\)   </td><td class="markdownTableBodyNone">\(b&#39;_3\)   </td><td class="markdownTableBodyNone">b'    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j + 4   </td><td class="markdownTableBodyNone">\(c_0\)   </td><td class="markdownTableBodyNone">\(c_1\)   </td><td class="markdownTableBodyNone">\(c_2\)   </td><td class="markdownTableBodyNone">\(c_3\)   </td><td class="markdownTableBodyNone">c    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">j + 5   </td><td class="markdownTableBodyNone">\(c&#39;_0\)   </td><td class="markdownTableBodyNone">\(c&#39;_1\)   </td><td class="markdownTableBodyNone">\(c&#39;_2\)   </td><td class="markdownTableBodyNone">\(c&#39;_3\)   </td><td class="markdownTableBodyNone">c'    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j + 6   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(maj\)   </td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">j + 0   </td><td class="markdownTableBodyNone">a'   </td><td class="markdownTableBodyNone">b'   </td><td class="markdownTableBodyNone">c'   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">maj   </td></tr>
 </table>
 <p>Sparse map gate constraints:</p>
-<p>\(w_{o,i} = w_{1,i} + w_{2,i}*2^8 + w_{3,i}*2^{8*2} + w_{4,i}*2^{8*3}\) <br  />
- \(w_{o,i+1} = w_{1,i+1} + w_{2,i+1}*4^8 + w_{3,i+1}*4^{8*2} + w_{4,i+1}*4^{8*3}\) <br  />
- \(w_{o, j+5} = w_{o,j+1} + w_{o, j+3} + w_{o, j+5}\)</p>
+<p>\(w_{o, j} = w_{1,j} + w_{2, j} + w_{3, j}\)</p>
 <p>The sparse values \(maj\) have to be normalized. We use <b>SHA256 MAJ NORMALIZE2</b></p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone"></th><th class="markdownTableHeadNone">\(w_1\)   </th><th class="markdownTableHeadNone">\(w_2\)   </th><th class="markdownTableHeadNone">\(w_3\)   </th><th class="markdownTableHeadNone">\(w_4\)   </th><th class="markdownTableHeadNone">\(w_o\)    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j - 8   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(a_{0, 2}\)   </td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">j + 0   </td><td class="markdownTableBodyNone">\(a&#39;_0\)   </td><td class="markdownTableBodyNone">\(a&#39;_1\)   </td><td class="markdownTableBodyNone">\(a&#39;_2\)   </td><td class="markdownTableBodyNone">\(a&#39;_3\)   </td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">...   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j + 0   </td><td class="markdownTableBodyNone">\(a_{2,1}\)   </td><td class="markdownTableBodyNone">\(a_{2,2}\)   </td><td class="markdownTableBodyNone">\(a_{3,1}\)   </td><td class="markdownTableBodyNone">\(a_{3,2}\)   </td><td class="markdownTableBodyNone">acc    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">j + 1   </td><td class="markdownTableBodyNone">\(a_{2,1}\)   </td><td class="markdownTableBodyNone">\(a_{2,2}\)   </td><td class="markdownTableBodyNone">\(a_{3,1}\)   </td><td class="markdownTableBodyNone">\(a_{3,2}\)   </td><td class="markdownTableBodyNone">\(maj\)   </td></tr>
+<td class="markdownTableBodyNone">j + 1   </td><td class="markdownTableBodyNone">\(a_0\)   </td><td class="markdownTableBodyNone">\(a_1\)   </td><td class="markdownTableBodyNone">\(a_2\)   </td><td class="markdownTableBodyNone">\(a_3\)   </td><td class="markdownTableBodyNone">\(maj\)   </td></tr>
 </table>
 <p>Normalize gate constraints:</p>
-<p>\(w_{o,i} = w_{o, i - 1} * 8^4 + w_{4,i}*8^3 + w_{3,i}* 8^2 + w_{2,i} * 8 + w_{1,i}\)</p>
+<p>\(w_{o,i} = w_{4,i}*256^3 + w_{3,i}* 256^2 + w_{2,i} * 8 + w_{1,i}\)</p>
 <p>The final addition requires one add gate.</p>
-<h2><a class="anchor" id="autotoc_md11"></a>
-The Ch function</h2>
-<p>The following defines the function Ch, which contain sparse mapping sub-circuit with base \(2\) for \(a, b ,c\).</p>
-<p>Let \(a; b; c\) be divided to \(a_0, a_1, a_2, a_3; b_0, b_1, b_2, b_3; c_0, c_1, c_2, c_3\) 8 bits-chunks. The values \(a&#39;_0, a&#39;_1, a&#39;_2, a&#39;_3\) are in sparse form, and \(a&#39;\) is a sparse \(a\). We need the following lookup tables:</p>
-<ol type="1">
-<li><b>SHA-256 NORMALIZE7</b>: Read \(a&#39;_i\) to \(a_i\)</li>
-</ol>
-<p>Similarly for b and c.</p>
+<h3><a class="anchor" id="autotoc_md10"></a>
+The Ch function</h3>
+<p>The following defines the Ch function, contain sparse mapping sub-circuit with base \(2\) for \(e, f ,g\). Let \(e; f; g\) be divided to \(e_0, e_1, e_2, e_3; f_0, f_1, f_2, f_3; g_0, g_1, g_2, g_3\) 8 bits-chunks. The values \(e&#39;_ 0, e&#39;_1, e&#39;_2, e&#39;_3\) are in sparse form, and \(e&#39;\) is a sparse \(e\). Similarly for b and c. Note, that \(e\) we already have in the sparse from \(\Sigma_0\) in the circuit. The variables \(f\) and \(g\) were represented in sparse form in the previous rounds or it is public inputs.</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone"></th><th class="markdownTableHeadNone">\(w_1\)   </th><th class="markdownTableHeadNone">\(w_2\)   </th><th class="markdownTableHeadNone">\(w_3\)   </th><th class="markdownTableHeadNone">\(w_4\)   </th><th class="markdownTableHeadNone">\(w_o\)    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j - 24   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(a_{0, 2}\)   </td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">j - k   </td><td class="markdownTableBodyNone">\(a&#39;_0\)   </td><td class="markdownTableBodyNone">\(a&#39;_1\)   </td><td class="markdownTableBodyNone">\(a&#39;_2\)   </td><td class="markdownTableBodyNone">\(a&#39;_3\)   </td><td class="markdownTableBodyNone">a'    </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">...   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j - 16   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(b_{0, 2}\)   </td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">j - l   </td><td class="markdownTableBodyNone">\(b&#39;_0\)   </td><td class="markdownTableBodyNone">\(b&#39;_1\)   </td><td class="markdownTableBodyNone">\(b&#39;_2\)   </td><td class="markdownTableBodyNone">\(b&#39;_3\) b'   </td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">...   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j - 8   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(c_{0, 2}\)   </td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">j - t   </td><td class="markdownTableBodyNone">\(c&#39;_0\)   </td><td class="markdownTableBodyNone">\(c&#39;_1\)   </td><td class="markdownTableBodyNone">\(c&#39;_2\)   </td><td class="markdownTableBodyNone">\(c&#39;_3\)   </td><td class="markdownTableBodyNone">c'    </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">...   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j + 0   </td><td class="markdownTableBodyNone">\(a_0\)   </td><td class="markdownTableBodyNone">\(a_1\)   </td><td class="markdownTableBodyNone">\(a_2\)   </td><td class="markdownTableBodyNone">\(a_3\)   </td><td class="markdownTableBodyNone">a    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">j + 1   </td><td class="markdownTableBodyNone">\(a&#39;_0\)   </td><td class="markdownTableBodyNone">\(a&#39;_1\)   </td><td class="markdownTableBodyNone">\(a&#39;_2\)   </td><td class="markdownTableBodyNone">\(a&#39;_3\)   </td><td class="markdownTableBodyNone">a'    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j + 2   </td><td class="markdownTableBodyNone">\(b_0\)   </td><td class="markdownTableBodyNone">\(b_1\)   </td><td class="markdownTableBodyNone">\(b_2\)   </td><td class="markdownTableBodyNone">\(b_3\)   </td><td class="markdownTableBodyNone">b    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">j + 3   </td><td class="markdownTableBodyNone">\(b&#39;_0\)   </td><td class="markdownTableBodyNone">\(b&#39;_1\)   </td><td class="markdownTableBodyNone">\(b&#39;_2\)   </td><td class="markdownTableBodyNone">\(b&#39;_3\)   </td><td class="markdownTableBodyNone">b'    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j + 4   </td><td class="markdownTableBodyNone">\(c_0\)   </td><td class="markdownTableBodyNone">\(c_1\)   </td><td class="markdownTableBodyNone">\(c_2\)   </td><td class="markdownTableBodyNone">\(c_3\)   </td><td class="markdownTableBodyNone">c    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">j + 5   </td><td class="markdownTableBodyNone">\(c&#39;_0\)   </td><td class="markdownTableBodyNone">\(c&#39;_1\)   </td><td class="markdownTableBodyNone">\(c&#39;_2\)   </td><td class="markdownTableBodyNone">\(c&#39;_3\)   </td><td class="markdownTableBodyNone">c'    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j + 6   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(ch\)   </td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">j + 0   </td><td class="markdownTableBodyNone">a'   </td><td class="markdownTableBodyNone">b'   </td><td class="markdownTableBodyNone">c'   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">ch   </td></tr>
 </table>
 <p>Sparse map gate constraints:</p>
-<p>\(w_{o,i} = w_{1,i} + w_{2,i}*2^8 + w_{3,i}*2^{8*2} + w_{4,i}*2^{8*3}\) <br  />
- \(w_{o,i+1} = w_{1,i+1} + w_{2,i+1}*7^8 + w_{3,i+1}*7^{8*2} + w_{4,i+1}*7^{8*3}\) <br  />
- \(w_{o, j+5} = w_{o,j+1} + 2*w_{o, j+3} + 3*w_{o, j+5}\)</p>
+<p>\(w_{o, j} = w_{1,j} + 2*w_{2, j} + 3*w_{3, j}\)</p>
 <p>The sparse values \(ch\) have to be normalized. We use <b>SHA256 CH NORMALIZE7</b></p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone"></th><th class="markdownTableHeadNone">\(w_1\)   </th><th class="markdownTableHeadNone">\(w_2\)   </th><th class="markdownTableHeadNone">\(w_3\)   </th><th class="markdownTableHeadNone">\(w_4\)   </th><th class="markdownTableHeadNone">\(w_o\)    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j - 8   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">\(a_{0, 2}\)   </td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">j + 0   </td><td class="markdownTableBodyNone">\(a&#39;_0\)   </td><td class="markdownTableBodyNone">\(a&#39;_1\)   </td><td class="markdownTableBodyNone">\(a&#39;_2\)   </td><td class="markdownTableBodyNone">\(a&#39;_3\)   </td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">...   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">j + 0   </td><td class="markdownTableBodyNone">\(a_{2,1}\)   </td><td class="markdownTableBodyNone">\(a_{2,2}\)   </td><td class="markdownTableBodyNone">\(a_{3,1}\)   </td><td class="markdownTableBodyNone">\(a_{3,2}\)   </td><td class="markdownTableBodyNone">acc    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">j + 1   </td><td class="markdownTableBodyNone">\(a_{2,1}\)   </td><td class="markdownTableBodyNone">\(a_{2,2}\)   </td><td class="markdownTableBodyNone">\(a_{3,1}\)   </td><td class="markdownTableBodyNone">\(a_{3,2}\)   </td><td class="markdownTableBodyNone">\(ch\)   </td></tr>
+<td class="markdownTableBodyNone">j + 1   </td><td class="markdownTableBodyNone">\(a_0\)   </td><td class="markdownTableBodyNone">\(a_1\)   </td><td class="markdownTableBodyNone">\(a_2\)   </td><td class="markdownTableBodyNone">\(a_3\)   </td><td class="markdownTableBodyNone">\(ch\)   </td></tr>
 </table>
 <p>Normalize gate constraints:</p>
-<p>\(w_{o,i} = w_{o, i - 1} * 8^4 + w_{4,i}*8^3 + w_{3,i}* 8^2 + w_{2,i} * 8 + w_{1,i}\)</p>
+<p>\(w_{o,i} = w_{4,i}*256^3 + w_{3,i}* 256^2 + w_{2,i} * 8 + w_{1,i}\)</p>
 <p>The final addition requires one add gate.</p>
 <p>The updating of variables for new rounds costs 10 add gates.</p>
 <p>Producing the final hash value costs two add gates. </p>
@@ -445,7 +337,7 @@ The Ch function</h2>
 </div>
 <hr class="footer"/>
 <address class="footer"><!--<small>
-Generated on Mon Oct 18 2021 14:38:20 for Solana In-EVM State Verification by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Oct 18 2021 17:01:40 for Solana In-EVM State Verification by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.9.1
 </small>--></address>
