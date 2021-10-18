@@ -135,7 +135,7 @@ Range proof</h2>
 <td class="markdownTableBodyNone">j + 7   </td><td class="markdownTableBodyNone">\(a_0\)   </td><td class="markdownTableBodyNone">\(a_1\)   </td><td class="markdownTableBodyNone">\(a_2\)   </td><td class="markdownTableBodyNone">\(a_3\)   </td><td class="markdownTableBodyNone">a   </td></tr>
 </table>
 <p>Range gate constraints:</p>
-<p>\(w_{1,i}(w_{1,i}-1)(w_{1,i}-2)(w_{1,i} -3) + w_{2,i}(w_{2,i}-1)(w_{2,i}-2)(w_{2,i} -3) + + w_{3,i}(w_{3,i}-1)(w_{3,i}-2)(w_{3,i} -3) + w_{4,i}(w_{4,i}-1)(w_{4,i}-2)(w_{4,i} -3)\) \(w_{o,i} = w_{o, i - 1} * 4^4 + w_{4,i}*4^3 + w_{3,i}* 4^2 + w_{2,i} * 4 + w_{1,i}\)</p>
+<p>\(w_{1,i}(w_{1,i}-1)(w_{1,i}-2)(w_{1,i} -3) + w_{2,i}(w_{2,i}-1)(w_{2,i}-2)(w_{2,i} - 3) + w_{3,i}(w_{3,i}-1)(w_{3,i}-2)(w_{3,i} -3) + w_{4,i}(w_{4,i}-1)(w_{4,i}-2)(w_{4,i} -3)\) \(w_{o,i} = w_{o, i - 1} * 4^4 + w_{4,i}*4^3 + w_{3,i}* 4^2 + w_{2,i} * 4 + w_{1,i}\)</p>
 <p>The range proofs are included for each input data block.</p>
 <h2><a class="anchor" id="autotoc_md14"></a>
 Sigma function #1</h2>
@@ -158,7 +158,7 @@ Sigma function #1</h2>
 <td class="markdownTableBodyNone">j + 3   </td><td class="markdownTableBodyNone">\(a&#39;_5\)   </td><td class="markdownTableBodyNone">\(a&#39;_6\)   </td><td class="markdownTableBodyNone">\(a&#39;_7\)   </td><td class="markdownTableBodyNone">\(r_1\)   </td><td class="markdownTableBodyNone">\(r_2\)   </td></tr>
 </table>
 <p>Sparse map gate constraints:</p>
-<p>\(w_{o,j+1} = w_{1,j} + w_{2,j}*2^8 + w_{3,j}*2^{8*2} + w_{4,j}*2^{8*3} + w_{o,j}*2^{8*4} + + w_{1,j+2}*2^{8*5} + w_{2,j+2}*2^{8*6} + w_{3,j+2}*2^{8*7}\) \(w_{o,j+2} = w_{2,j+1}*4^{8-1} + w_{3,j+1}*4^{8*2-1} + w_{4,j+1}*4^{8*3 - 1} + w_{4,j+2}*4^{8*4 - 1} + w_{1,j+3}*4^{8*5 - 1} + w_{2,j+3}*4^{8*6 - 1} + w_{3,j+3}*4^{8*7 - 1} + w_{1,j+1}*4^{8*7} + w_{2,j+1} + w_{3,j+1}*4^{8} + w_{4,j+1}*4^{8*2} +w_{4,j+2}*4^{8*3} + w_{1,j+3}*4^{8*4} + w_{2,j+3}*4^{8*5} + w_{3,j+3}*4^{8*6} + w_{2,j+1}*4^{8-7} + w_{3,j+1}*4^{8*2-7} + w_{4,j+1}*4^{8*3 - 7} + w_{4,j+2}*4^{8*4 - 7} + w_{1,j+3}*4^{8*5 - 7} + w_{2,j+3}*4^{8*6 - 7} + w_{3,j+3}*4^{8*7 - 7} + w_{4, j+3} + w_{o, j+3}\)</p>
+<p>\(w_{o,j+1} = w_{1,j} + w_{2,j}*2^8 + w_{3,j}*2^{8*2} + w_{4,j}*2^{8*3} + w_{o,j}*2^{8*4} + w_{1,j+2}*2^{8*5} + w_{2,j+2}*2^{8*6} + w_{3,j+2}*2^{8*7}\) \(w_{o,j+2} = w_{2,j+1}*4^{8-1} + w_{3,j+1}*4^{8*2-1} + w_{4,j+1}*4^{8*3 - 1} + w_{4,j+2}*4^{8*4 - 1} + w_{1,j+3}*4^{8*5 - 1} + w_{2,j+3}*4^{8*6 - 1} + w_{3,j+3}*4^{8*7 - 1} + w_{1,j+1}*4^{8*7} + w_{2,j+1} + w_{3,j+1}*4^{8} + w_{4,j+1}*4^{8*2} +w_{4,j+2}*4^{8*3} + w_{1,j+3}*4^{8*4} + w_{2,j+3}*4^{8*5} + w_{3,j+3}*4^{8*6} + w_{2,j+1}*4^{8-7} + w_{3,j+1}*4^{8*2-7} + w_{4,j+1}*4^{8*3 - 7} + w_{4,j+2}*4^{8*4 - 7} + w_{1,j+3}*4^{8*5 - 7} + w_{2,j+3}*4^{8*6 - 7} + w_{3,j+3}*4^{8*7 - 7} + w_{4, j+3} + w_{o, j+3}\)</p>
 <p>10 plookup constraints</p>
 <h2><a class="anchor" id="autotoc_md15"></a>
 Sigma function #2</h2>
@@ -327,7 +327,7 @@ The Ch function</h3>
 </div>
 <hr class="footer"/>
 <address class="footer"><!--<small>
-Generated on Mon Oct 18 2021 14:30:48 for Solana In-EVM State Verification by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Oct 18 2021 14:38:20 for Solana In-EVM State Verification by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.9.1
 </small>--></address>
