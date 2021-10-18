@@ -160,9 +160,9 @@ Sigma function #1</h2>
 <p>Sparse map gate constraints:</p>
 <p>\(w_{o,j+1} = w_{1,j} + w_{2,j}*2^8 + w_{3,j}*2^{8*2} + w_{4,j}*2^{8*3} + w_{o,j}*2^{8*4} + + w_{1,j+2}*2^{8*5} + w_{2,j+2}*2^{8*6} + w_{3,j+2}*2^{8*7}\) \(w_{o,j+2} = w_{2,j+1}*4^{8-1} + w_{3,j+1}*4^{8*2-1} + w_{4,j+1}*4^{8*3 - 1} + w_{4,j+2}*4^{8*4 - 1} + w_{1,j+3}*4^{8*5 - 1} + w_{2,j+3}*4^{8*6 - 1} + w_{3,j+3}*4^{8*7 - 1} + w_{1,j+1}*4^{8*7} + w_{2,j+1} + w_{3,j+1}*4^{8} + w_{4,j+1}*4^{8*2} +w_{4,j+2}*4^{8*3} + w_{1,j+3}*4^{8*4} + w_{2,j+3}*4^{8*5} + w_{3,j+3}*4^{8*6} + w_{2,j+1}*4^{8-7} + w_{3,j+1}*4^{8*2-7} + w_{4,j+1}*4^{8*3 - 7} + w_{4,j+2}*4^{8*4 - 7} + w_{1,j+3}*4^{8*5 - 7} + w_{2,j+3}*4^{8*6 - 7} + w_{3,j+3}*4^{8*7 - 7} + w_{4, j+3} + w_{o, j+3}\)</p>
 <p>10 plookup constraints</p>
-<h3><a class="anchor" id="autotoc_md15"></a>
-The function \f$\sigma_1\f$</h3>
-<p>contain sparse mapping subcircuit with base \(2\). Let \(a\) be divided to \(a_0, a_1, a_2, ..., a_7\) 8 bits-chunks. The values \(a&#39;_0, a&#39;_1, a&#39;_2,..., a&#39;_7\) are in sparse form, and \(a&#39;\) is a sparse \(a\). We need the following lookup tables:</p>
+<h2><a class="anchor" id="autotoc_md15"></a>
+Sigma function #2</h2>
+<p>The following defines the function \(\sigma_1\), which contains sparse mapping sub-circuit with base \(2\). Let \(a\) be divided to \(a_0, a_1, a_2, ..., a_7\) 8 bits-chunks. The values \(a&#39;_0, a&#39;_1, a&#39;_2,..., a&#39;_7\) are in sparse form, and \(a&#39;\) is a sparse \(a\). We need the following lookup tables:</p>
 <ol type="1">
 <li><b>SHA-256 NORMALIZE2</b>: Read \(a_i\) to \(a&#39;_i\)</li>
 <li><b>SHA-256 8ROT3 64</b>: Read \(a&#39;_2\) to \(r_1\)</li>
@@ -199,9 +199,9 @@ The function \f$\sigma_1\f$</h3>
 <p>Normalize gate constraints:</p>
 <p>\(w_{o,j+1} = w_{4,j+1} * 256^3 + w_{3,j+1}*256^2 + w_{2,j+1}* 256 + w_{1,j+1} + w_{1,j+3}*256^4 + w_{2,j+3} * 256^5+w_{3,j+3}*256^6 + w_{4,j+4}* 256^7\) \(w_{o,j} = w_{o, j - 2} - (w_{4,j} * 256^3 + w_{3,j}*256^2 + w_{2,j}* 256 + w_{1,j})\) \(w_{o,j+1} = w_{o,j} - ( w_{1,j+3}*256^4 + w_{2,j+3} * 256^5+ w_{3,j+3}*256^6 + w_{4,j+4}* 256^7)\)</p>
 <p>8 plookup constraints\</p>
-<h3><a class="anchor" id="autotoc_md16"></a>
-The \f$\Sigma_0\f$ function</h3>
-<p>contain sparse mapping subcircuit with base \(2\). Let \(a\) be divided to \(a_0, a_1, a_2,a_3\) 7-bits chunks and \(a_4, a_5, a_6, a_7\) 9 bits-chunks. The values \(a&#39;_0, a&#39;_1, a&#39;_2,..., a&#39;_7\) are in sparse form, and \(a&#39;\) is a sparse \(a\). We need the following lookup tables:</p>
+<h2><a class="anchor" id="autotoc_md16"></a>
+Sigma function #3</h2>
+<p>The following defines the \(\Sigma_0\) function, which contain sparse mapping sub-circuit with base \(2\). Let \(a\) be divided to \(a_0, a_1, a_2,a_3\) 7-bits chunks and \(a_4, a_5, a_6, a_7\) 9 bits-chunks. The values \(a&#39;_0, a&#39;_1, a&#39;_2,..., a&#39;_7\) are in sparse form, and \(a&#39;\) is a sparse \(a\). We need the following lookup tables:</p>
 <ol type="1">
 <li><b>SHA-256 9NORMALIZE2</b>: Read \(a_i\) to \(a&#39;_i\)</li>
 <li><b>SHA-256 7NORMALIZE2</b>: Read \(a_i\) to \(a&#39;_i\)</li>
@@ -223,9 +223,9 @@ The \f$\Sigma_0\f$ function</h3>
 <p>Sparse map gate constraints:</p>
 <p>\(w_{o,j+1} = w_{1,j} + w_{2,j}*2^7 + w_{3,j}*2^{7*2} + w_{4,j}*2^{7*3} + w_{o,j}*2^{7*4} + w_{1,j+2}*2^{7*4 + 9} + w_{2,j+2}*2^{7*4 + 9*2} + w_{3,j+2}*2^{7*4 + 9*3}\) \(w_{o,j+2} = w_{4,j+2} + w_{1,j+3}*4^9 + w_{2,j+3}*4^{9*2} + w_{3,j+3}*4^{9*3} + w_{1,j+1}*4^{9*4} + w_{2,j+1}*4^{9*4+7} + w_{3,j+1}*4^{9*4 +7*2} + w_{4,j+1}*4^{9*4 +7*3} + w_{1,j+1}*4^{64 - 34)} + w_{2,j+1}*4^{64 + (7 - 34)} + w_{3,j+1}*4^{64 + (7*2 - 34)} + w_{4,j+1}*4^{64 + (7*3- 34)} +w_{1,j+3}*4^{64 + (7*4 + 9 - 34)} + w_{2,j+3}*4^{64 + (7*4 +9 *2 -34)} + w_{3,j+3}*4^{64 +(7*4 + 9*3- 34)} + w_{1,j+1}*4^{64 - 39)} + w_{2,j+1}*4^{64 + (7 - 39)} + w_{3,j+1}*4^{64+ (7*2 - 39)} + w_{4,j+1}*4^{64 + (7*3- 39)} +w_{4,j+2}*4^{64 + (7*4- 39)} + w_{2,j+3}*4^{64 + (7*4 + 9*2 -39)} + w_{3,j+3}*4^{64 +(7*4 + 9*3- 39)} + w_{4, j+3} + w_{o, j+3}\)</p>
 <p>10 plookup constraints</p>
-<h3><a class="anchor" id="autotoc_md17"></a>
-The \f$\Sigma_1\f$ function</h3>
-<p>contain sparse mapping subcircuit with base \(2\). Let \(a\) be divided to \(a_0, a_1, a_2,a_3\) 7-bits chunks and \(a_4, a_5, a_6, a_7\) 9 bits-chunks. The values \(a&#39;_0, a&#39;_1, a&#39;_2,..., a&#39;_7\) are in sparse form, and \(a&#39;\) is a sparse \(a\). We need the following lookup tables:</p>
+<h2><a class="anchor" id="autotoc_md17"></a>
+Sigma function #4</h2>
+<p>The following defines the \(\Sigma_1\) function, which contains sparse mapping sub-circuit with base \(2\). Let \(a\) be divided to \(a_0, a_1, a_2,a_3\) 7-bits chunks and \(a_4, a_5, a_6, a_7\) 9 bits-chunks. The values \(a&#39;_0, a&#39;_1, a&#39;_2,..., a&#39;_7\) are in sparse form, and \(a&#39;\) is a sparse \(a\). We need the following lookup tables:</p>
 <ol type="1">
 <li><b>SHA-256 9NORMALIZE2</b>: Read \(a_i\) to \(a&#39;_i\)</li>
 <li><b>SHA-256 7NORMALIZE2</b>: Read \(a_i\) to \(a&#39;_i\)</li>
@@ -265,7 +265,7 @@ The \f$\Sigma_1\f$ function</h3>
 <p>8 plookup constraints</p>
 <h3><a class="anchor" id="autotoc_md18"></a>
 The Maj function</h3>
-<p>contain sparse mapping subcircuit with base \(2\) for \(a, b ,c\). Note, that the sparse chunks of \(a\) we already have in \(\Sigma_0\) in the circuit. The variables \(b\) and \(c\) were represented in sparse chunks in the previous rounds or it is public inputs.</p>
+<p>The following defines the Maj function, which contains sparse mapping sub-circuit with base \(2\) for \(a, b ,c\). Note, that the sparse chunks of \(a\) we already have in \(\Sigma_0\) in the circuit. The variables \(b\) and \(c\) were represented in sparse chunks in the previous rounds or it is public inputs.</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone"></th><th class="markdownTableHeadNone">\(w_1\)   </th><th class="markdownTableHeadNone">\(w_2\)   </th><th class="markdownTableHeadNone">\(w_3\)   </th><th class="markdownTableHeadNone">\(w_4\)   </th><th class="markdownTableHeadNone">\(w_o\)    </th></tr>
@@ -294,7 +294,7 @@ The Maj function</h3>
 <p>The final addition requires one add gate.</p>
 <h3><a class="anchor" id="autotoc_md19"></a>
 The Ch function</h3>
-<p>contain sparse mapping subcircuit with base \(2\) for \(e, f ,g\). Note, that \(e\) we already have in the sparse from \(\Sigma_1\) in the circuit. The variables \(f\) and \(g\) were represented in sparse form in the previous rounds or it is public inputs.</p>
+<p>The following defines the Ch function, which contains sparse mapping sub-circuit with base \(2\) for \(e, f ,g\). Note, that \(e\) we already have in the sparse from \(\Sigma_1\) in the circuit. The variables \(f\) and \(g\) were represented in sparse form in the previous rounds or it is public inputs.</p>
 <p>| | \(w_1\) | \(w_2\) | \(w_3\) | \(w_4\) | \(w_o\) |----&mdash;|--------&mdash;|---------&mdash;|--------&mdash;|---------&mdash;|---------&mdash; | j + 0 | e' | f' | g' | h |</p>
 <p>Sparse map gate constraints:</p>
 <p>\(w_{o, j} = w_{1,j} + 2*w_{2, j} + 3*w_{3, j}\)\</p>
@@ -327,7 +327,7 @@ The Ch function</h3>
 </div>
 <hr class="footer"/>
 <address class="footer"><!--<small>
-Generated on Mon Oct 18 2021 14:20:42 for Solana In-EVM State Verification by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Oct 18 2021 14:30:48 for Solana In-EVM State Verification by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.9.1
 </small>--></address>
