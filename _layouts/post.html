@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% include head.html %}
+    <body>
+        {% include header.html %}
+        <div class="container d-flex flex-column align-items-center">
+            <div class="pb-4 pt-4 w-100">
+                <h2>{{ page.title }}</h2>
+            </div>
+            <div class="row w-100 no-gutters justify-content-center">
+                <div class="col-12">
+                    <div class="d-flex flex-column align-items-start">
+                        {% if page.description %}
+                        <div class="d-flex justify-content-center">
+                            <p class="lead lead-blog">{{ page.description }}</p>
+                        </div>
+                        {% endif %}
+                        <div class="d-flex justify-content-start">
+                            <p class="lead lead-blog">Written by {{ page.author }} on {{ page.date | date_to_string }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row w-100 no-gutters justify-content-center">
+                <div class="col-12">
+                    <div class="bs-component">
+                        <div class="jumbotron">
+                            <p class="lead">{{ content }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if page.comments == true %}
+            <div class="alert alert-success alert-dismissible col fade show"
+                 role="alert" id="alert-success" style="display:none;">
+                <h4 class="alert-heading">Your comment was successfully submitted!</h4>
+                <hr>
+                <p>It will be published after moderation.</p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="alert alert-danger alert-dismissible col fade show"
+                 role="alert" id="alert-danger" style="display:none;">
+                <h4 class="alert-heading">An error occured while submitting your comment!</h4>
+                <hr>
+                <p>In case you're sure you did nothing wrong, contact 
+                <a href="mailto:nemo@nil.foundation">nemo@nil.foundation</a>
+                </p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="row w-100 no-gutters justify-content-center">
+                <div class="col-12">
+                    <div class="bs-component">
+                        <div class="jumbotron mt-12" id="comments">
+                            {% include comments.html %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% include footer.html post="post" %}
+        </div> 
+        <div class="modal"
+             id="modal"
+             tabindex="-1"
+             role="dialog"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div id="success-message" class="flex-column">
+                            <h5>Your comment was successfully submitted!</h5>
+                            <p>It will be published after moderation.</p>
+                        </div>
+                        <div id="error-message" class="flex-column">
+                            <p>An error occured during adding your comment!</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="hideModal()">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <script src="{{site.baseurl}}/assets/js/form.js"></script>
+        <script src="{{site.baseurl}}/assets/js/jquery.min.js"></script>
+        <script src="{{site.baseurl}}/assets/js/bootstrap.min.js"></script>
+    </body>
+</html>

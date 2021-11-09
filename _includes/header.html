@@ -23,23 +23,25 @@
                 </div>
                 <div class="jumbotron intro-projects">
                     <div class="list-group page-scroll">
-                        {% for post in site.posts %}
-                        {% if post.tag == "project" and post == site.posts[0] %}
+                        {% for tag in site.tags %}
+                        {% if tag[0] == "blog" %}
+                        {% for post in tag[1] %}
                         <a class="list-group-item" href="{{ post.link }}">
                             <!--<div class="well">
                                 <img src="img/projects/{{ post.img }}" class="img-responsive" alt="{{ post.alt }}">
                                 </div>-->
-                                <h4 class="list-group-item-heading">{{ post.name }}</h4>
-                                <p class="list-group-item-text">{{ post.description }}</p>
+                                <h4 class="list-group-item-heading">{{ post.title }}</h4>
+                                <p class="list-group-item-text">{{ post.excerpt }}</p>
                         </a>
+                        {% endfor %}
                         {% endif %}
                         {% endfor %}
-                        <a class="list-group-item" href="#projects">
+                        <a class="list-group-item" href="https://blog.nil.foundation/tag/solana/">
                             <!--<div class="well">
                                 <img src="img/projects/{{ post.img }}" class="img-responsive" alt="{{ post.alt }}">
                                 </div>-->
-                                <h4 class="list-group-item-heading">Other Projects...</h4>
-                                <p class="list-group-item-text">See our other {{ site.titles.last.title }}-related projects</p>
+                                <h4 class="list-group-item-heading">Other Blog Posts...</h4>
+                                <p class="list-group-item-text">See our other {{ site.titles.last.title }}-related blog posts.</p>
                         </a>
                     </div>
                 </div>

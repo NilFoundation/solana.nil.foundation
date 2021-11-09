@@ -11,13 +11,13 @@
             <div class="jumbotron">
                 <div class="list-group">
                     {% for post in site.posts %}
-                    {% if post.tag == "project" %}
+                    {% if post.tags contains "project" %}
                     <a class="list-group-item" href="{{ post.link }}">
                         <div class="well">
                             <img src="img/projects/{{ post.img }}" class="img-responsive" alt="{{ post.alt }}">
                         </div>
-                        <h4 class="list-group-item-heading">{{ post.name }}</h4>
-                        <p class="list-group-item-text">{{ post.description }}</p>
+                        <h4 class="list-group-item-heading">{{ post.title }}</h4>
+                        <p class="list-group-item-text">{{ post.excerpt }}</p>
                     </a>
                     {% endif %}
                     {% endfor %}

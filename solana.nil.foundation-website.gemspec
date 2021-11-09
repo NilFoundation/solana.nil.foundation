@@ -1,12 +1,12 @@
 # coding: utf-8
 
 Gem::Specification.new do |spec|
-  spec.name                    = "crypto3.nilfoundation-website"
+  spec.name                    = "solana.nilfoundation-website"
   spec.version                 = "1.0.0"
   spec.authors                 = ["Mikhail Komarov"]
 
-  spec.summary                 = %q{=nil; Crypto3 Website}
-  spec.homepage                = "https://github.com/nemothenoone/crypto3.nil.foundation"
+  spec.summary                 = %q{=nil; Foundation's Solana Website}
+  spec.homepage                = "https://github.com/nilfoundation/solana.nil.foundation"
   spec.licenses                = ["MIT"]
 
   spec.metadata["plugin_type"] = "theme"
@@ -14,14 +14,6 @@ Gem::Specification.new do |spec|
   spec.files                   = `git ls-files -z`.split("\x0").select do |f|
     f.match(%r{^(assets|_(includes|layouts|posts)/|(LICENSE|README)((\.(txt|md|markdown)|$)))}i)
   end
-
-  spec.add_runtime_dependency "jekyll", "~> 3.6"
-  spec.add_runtime_dependency "jekyll-paginate", "~> 1.1"
-  spec.add_runtime_dependency "jekyll-sitemap", "~> 1.1"
-  spec.add_runtime_dependency "jekyll-gist", "~> 1.4"
-  spec.add_runtime_dependency "jekyll-feed", "~> 0.9.2"
-  spec.add_runtime_dependency "jekyll-data", "~> 1.0"
-  spec.add_runtime_dependency "jemoji", "~> 0.8"
 
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "rake", "~> 10.0"
