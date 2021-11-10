@@ -1,4 +1,4 @@
-# =nil; Crypto3 Website  [![Build Status](https://travis-ci.com/nemothenoone/crypto3.nil.foundation.svg?token=DHGZQ8ocJtbnXsTs61qE&branch=master)](https://travis-ci.com/nemothenoone/crypto3.nil.foundation)
+# =nil; Foundation's Solana Website
 
 Jekyll theme based on [Freelancer bootstrap theme ](http://startbootstrap.com/template-overviews/freelancer/)
 
