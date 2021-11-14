@@ -1,5 +1,7 @@
 body {
     overflow-x: hidden;
+    background-image: url(img/background.svg);
+    background-attachment: fixed;
 }
 
 p {
@@ -76,7 +78,6 @@ hr.star-primary:after {
 header {
     text-align: left;
     color: #{{ site.color.text-color }};
-    background: #{{ site.color.background-color }};
 }
 
 header .container {
@@ -217,7 +218,6 @@ section h2 {
 
 #projects {
     color: #{{ site.color.text-color }};
-    background: #{{ site.color.background-color }};
 }
 
 #projects h2 {
